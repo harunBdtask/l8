@@ -114,6 +114,7 @@
         });
         // initialize btn add
         $('#createNew').click(function () {
+            $('#saveBtn').removeClass("d-none");
             $('#saveBtn').val("create");
             $('#id').val('');
             $('#addForm').trigger("reset");
@@ -123,7 +124,17 @@
         $('body').on('click', '.editUser', function () {
             var id = $(this).data('id');
             $.get("{{route('todo.index')}}" + '/' + id + '/edit', function (data) {
+                $('#saveBtn').removeClass("d-none");
                 $('#saveBtn').val("edit");
+                $('#addModal').modal('show');
+                $('#id').val(data.id);
+                $('#title').val(data.title);
+            })
+        });
+        $('body').on('click', '.actionPreview', function () {
+            var id = $(this).data('id');
+            $.get("{{route('todo.index')}}" + '/' + id + '/edit', function (data) {
+                $('#saveBtn').addClass("d-none");
                 $('#addModal').modal('show');
                 $('#id').val(data.id);
                 $('#title').val(data.title);
