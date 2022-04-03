@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddColumnDescriptionTotosTable extends Migration
+class AddColumnToItemsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddColumnDescriptionTotosTable extends Migration
      */
     public function up()
     {
-        Schema::table('todos', function (Blueprint $table) {
-            $table->text('description')->nullable()->after('id');
+        Schema::table('items', function (Blueprint $table) {
+            $table->string('title')->nullable()->after('id');
         });
     }
 
@@ -25,8 +25,8 @@ class AddColumnDescriptionTotosTable extends Migration
      */
     public function down()
     {
-        Schema::table('todos', function (Blueprint $table) {
-            $table->dropColumn('description');
+        Schema::table('items', function (Blueprint $table) {
+            $table->dropColumn('title');
         });
     }
 }

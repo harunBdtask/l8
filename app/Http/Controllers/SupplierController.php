@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Todo;
+use App\Models\Supplier;
 use Illuminate\Http\Request;
 use \Yajra\Datatables\Datatables;
 
-class TodoController extends Controller
+class SupplierController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,14 +16,14 @@ class TodoController extends Controller
     public function index( Request $request)
     {
         $data = [
-            'count_todo' => Todo::latest()->count(),
+            'count_Supplier' => Supplier::latest()->count(),
             'menu'       => 'menu.v_menu_admin',
-            'content'    => 'content.view_todo',
-            'title'    => 'Todo List'
+            'content'    => 'supplier.view_item_supplier',
+            'title'    => 'Supplier List'
         ];
         //datatable
         if ($request->ajax()) {
-            $q_user = Todo::select('*')->orderByDesc('id');
+            $q_user = Supplier::select('*')->orderByDesc('id');
             return Datatables::of($q_user)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
@@ -58,7 +58,7 @@ class TodoController extends Controller
      */
     public function store(Request $request)
     {
-        Todo::updateOrCreate(['id' => $request->id],
+        Supplier::updateOrCreate(['id' => $request->id],
                 [
                  'title' => $request->title,
                  'created_at' => date('Y-m-d H:i:s'),
@@ -70,10 +70,10 @@ class TodoController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Todo  $todo
+     * @param  \App\Models\Supplier  $supplier
      * @return \Illuminate\Http\Response
      */
-    public function show(Todo $todo)
+    public function show(Supplier $supplier)
     {
         //
     }
@@ -81,12 +81,12 @@ class TodoController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Todo  $todo
+     * @param  \App\Models\Supplier  $supplier
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $data = Todo::find($id);
+        $data = Supplier::find($id);
         return response()->json($data);
     }
 
@@ -94,10 +94,10 @@ class TodoController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Todo  $todo
+     * @param  \App\Models\Supplier  $supplier
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Todo $todo)
+    public function update(Request $request, Supplier $supplier)
     {
         //
     }
@@ -105,12 +105,12 @@ class TodoController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Todo  $todo
+     * @param  \App\Models\Supplier  $supplier
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        Todo::find($id)->delete();
+        Supplier::find($id)->delete();
 
         return response()->json(['success'=>'Successfully deleted!']);
     }
