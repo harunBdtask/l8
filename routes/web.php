@@ -1,10 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\UsersController;
 use App\Http\Controllers\TodoController;
+use App\Http\Controllers\ItemController;
+use App\Http\Controllers\SupplierController;
 
 
 
@@ -32,3 +34,7 @@ Route::get('/user', [UserController::class, 'index'])->name('user.index');
 Route::resource('users', UsersController::class);
 //TodoController
 Route::resource('todo', TodoController::class);
+//ItemController
+Route::resource('items', ItemController::class);
+//SupplierController
+Route::resource('suppliers', SupplierController::class);
