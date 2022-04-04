@@ -30,7 +30,7 @@
         <div id="kt_aside_menu" class="aside-menu my-4" data-menu-vertical="1" data-menu-scroll="1" data-menu-dropdown-timeout="500">
             <!--begin::Menu Nav-->
             <ul class="menu-nav">
-                <li class="menu-item menu-item-active" aria-haspopup="true">
+                <li class="{{ (request()->is('home')) ? 'menu-item menu-item-active' : 'menu-item ' }}" aria-haspopup="true">
                     <a href="{{route('home')}}" class="menu-link">
                         <span class="svg-icon menu-icon">
                             <!--begin::Svg Icon | path:/metronic/theme/html/demo1/dist/assets/media/svg/icons/Design/Layers.svg-->
@@ -51,7 +51,7 @@
                     <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
                 </li>
                 <!-- Raw Material Start -->
-                <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                <li class="{{ ((request()->is('items')) || (request()->is('suppliers'))) ? 'menu-item menu-item-submenu menu-item-open' : 'menu-item menu-item-submenu' }}" aria-haspopup="true" data-menu-toggle="hover">
                     <a href="javascript:;" class="menu-link menu-toggle">
                         <span class="menu-icon fas fa-list"></span>
                         <span class="menu-text">Raw Material</span>
@@ -60,7 +60,7 @@
                     <div class="menu-submenu">
                         <ul class="menu-subnav">
                             <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-                                <a href="{{url('items')}}" class="menu-link menu-toggle">
+                                <a href="{{url('items')}}" class="{{ (request()->is('items')) ? 'menu-link menu-link-active' : 'menu-link ' }}">
                                     <i class="menu-bullet menu-bullet-line">
                                         <span></span>
                                     </i>
