@@ -1,0 +1,19 @@
+<?php
+
+use Illuminate\Support\Facades\Route;
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|
+*/
+
+Route::prefix('purchase')->group(function() {
+    Route::get('/', 'PurchaseController@index');
+    //RequisitionController
+    Route::resource('requisition', RequisitionController::class);
+});

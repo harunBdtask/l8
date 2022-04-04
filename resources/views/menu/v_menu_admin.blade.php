@@ -30,7 +30,7 @@
         <div id="kt_aside_menu" class="aside-menu my-4" data-menu-vertical="1" data-menu-scroll="1" data-menu-dropdown-timeout="500">
             <!--begin::Menu Nav-->
             <ul class="menu-nav">
-                <li class="menu-item menu-item-active" aria-haspopup="true">
+                <li class="{{ (request()->is('home')) ? 'menu-item menu-item-active' : 'menu-item ' }}" aria-haspopup="true">
                     <a href="{{route('home')}}" class="menu-link">
                         <span class="svg-icon menu-icon">
                             <!--begin::Svg Icon | path:/metronic/theme/html/demo1/dist/assets/media/svg/icons/Design/Layers.svg-->
@@ -50,6 +50,59 @@
                     <h4 class="menu-text">Custom</h4>
                     <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
                 </li>
+                <!-- Raw Material Start -->
+                <li class="{{ ((request()->is('items')) || (request()->is('suppliers'))) ? 'menu-item menu-item-submenu menu-item-open' : 'menu-item menu-item-submenu' }}" aria-haspopup="true" data-menu-toggle="hover">
+                    <a href="javascript:;" class="menu-link menu-toggle">
+                        <span class="menu-icon fas fa-list"></span>
+                        <span class="menu-text">Raw Material</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="menu-submenu">
+                        <ul class="menu-subnav">
+                            <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                                <a href="{{url('items')}}" class="{{ (request()->is('items')) ? 'menu-link menu-link-active' : 'menu-link ' }}">
+                                    <i class="menu-bullet menu-bullet-line">
+                                        <span></span>
+                                    </i>
+                                    <span class="menu-text">Item List</span>
+                                </a>
+                            </li>
+                            <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                                <a href="{{url('suppliers')}}" class="menu-link menu-toggle">
+                                    <i class="menu-bullet menu-bullet-line">
+                                        <span></span>
+                                    </i>
+                                    <span class="menu-text">Supplier List</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <!-- Raw Material End -->
+
+                <!-- Purchase Start -->
+                <li class="{{ ((request()->is('purchase/requisition')) || (request()->is('purchase/requisition'))) ? 'menu-item menu-item-submenu menu-item-open' : 'menu-item menu-item-submenu' }}" aria-haspopup="true" data-menu-toggle="hover">
+                    <a href="javascript:;" class="menu-link menu-toggle">
+                        <span class="menu-icon fas fa-shopping-cart"></span>
+                        <span class="menu-text">Purchase</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="menu-submenu">
+                        <ul class="menu-subnav">
+                            <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                                <a href="{{url('purchase/requisition')}}" class="{{ (request()->is('purchase/requisition')) ? 'menu-link menu-link-active' : 'menu-link ' }}">
+                                    <i class="menu-bullet menu-bullet-line">
+                                        <span></span>
+                                    </i>
+                                    <span class="menu-text">Requisition</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <!-- Purchase End -->
+
+                <!-- Applications Start -->
                 <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
                     <a href="javascript:;" class="menu-link menu-toggle">
                         <span class="svg-icon menu-icon">
@@ -98,7 +151,7 @@
                         </ul>
                     </div>
                 </li>
-            
+                <!-- Applications End -->
                 <li class="menu-item" aria-haspopup="true">
                     <a href="#" class="menu-link">
                         <span class="menu-icon fas fa-cog">

@@ -4,10 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\Todo;
 use Illuminate\Http\Request;
-use DataTables;
+use \Yajra\Datatables\Datatables;
 
 class TodoController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -29,7 +33,8 @@ class TodoController extends Controller
                     ->addColumn('action', function($row){
      
                         $btn = '<div data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Edit" class="btn btn-sm btn-icon btn-outline-success btn-circle mr-2 edit editUser"><i class=" fi-rr-edit"></i></div>';
-                        $btn = $btn.' <div data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Delete" class="btn btn-sm btn-icon btn-outline-danger btn-circle mr-2 deleteUser"><i class="fi-rr-trash"></i></div>';
+                        $btn .= ' <div data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Details" class="btn btn-sm btn-icon btn-outline-info btn-circle mr-2 actionPreview"><i class="fi-rr-eye"></i></div>';
+                        $btn .= ' <div data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Delete" class="btn btn-sm btn-icon btn-outline-danger btn-circle mr-2 deleteUser"><i class="fi-rr-trash"></i></div>';
  
                          return $btn;
                     })
