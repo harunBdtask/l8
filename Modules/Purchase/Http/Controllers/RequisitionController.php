@@ -65,10 +65,9 @@ class RequisitionController extends Controller
     {
         $result = Requisition::updateOrCreate(['id' => $request->id],
                 [
-                //  'voucher_no' => $request->voucher_no,
-                 'voucher_no' => 2,
-                 'created_at' => date('Y-m-d H:i:s'),
-                 'updated_at' => date('Y-m-d H:i:s'),
+                 'voucher_no' => $request->voucher_no,
+                 'date' => $request->date,
+                 'type' => 1,
                 ]);
         $details = array(
             'parent_id' => $result->id,
