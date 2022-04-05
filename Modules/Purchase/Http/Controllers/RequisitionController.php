@@ -1,29 +1,36 @@
 <?php
 
-namespace Modules\Blog\Http\Controllers;
+namespace Modules\Purchase\Http\Controllers;
 
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Modules\Blog\Entities\Post;
+use Modules\Purchase\Entities\Requisition;
+use Modules\Purchase\Entities\Requisition_details;
 use \Yajra\Datatables\Datatables;
 
-class BlogController extends Controller
+class RequisitionController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
-     * @return Renderable
+     *
+     * @return \Illuminate\Http\Response
      */
-
     public function index( Request $request)
     {
         $data = [
+            'count_Requisition' => Requisition::latest()->count(),
             'menu'       => 'menu.v_menu_admin',
-            'content'    => 'blog::index',
-            'title'    => 'Blog List'
+            'content'    => 'purchase::view_requisition',
+            'title'      => 'Requisition List'
         ];
+        //datatable
         if ($request->ajax()) {
-            $q_user = Post::select('*')->orderByDesc('id');
+            $q_user = Requisition::select('*')->orderByDesc('id');
             return Datatables::of($q_user)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
@@ -46,7 +53,7 @@ class BlogController extends Controller
      */
     public function create()
     {
-        return view('blog::create');
+        return view('purchase::create');
     }
 
     /**
@@ -56,9 +63,9 @@ class BlogController extends Controller
      */
     public function store(Request $request)
     {
-        Post::updateOrCreate(['id' => $request->id],
+        Requisition::updateOrCreate(['id' => $request->id],
                 [
-                 'title' => $request->title,
+                 'voucher_no' => $request->voucher_no,
                  'created_at' => date('Y-m-d H:i:s'),
                  'updated_at' => date('Y-m-d H:i:s'),
                 ]);
@@ -72,7 +79,7 @@ class BlogController extends Controller
      */
     public function show($id)
     {
-        return view('blog::show');
+        return view('purchase::show');
     }
 
     /**
@@ -82,7 +89,7 @@ class BlogController extends Controller
      */
     public function edit($id)
     {
-        $data = Post::find($id);
+        $data = Requisition::find($id);
         return response()->json($data);
     }
 
@@ -104,7 +111,7 @@ class BlogController extends Controller
      */
     public function destroy($id)
     {
-        Post::find($id)->delete();
+        Requisition::find($id)->delete();
 
         return response()->json(['success'=>'Successfully deleted!']);
     }

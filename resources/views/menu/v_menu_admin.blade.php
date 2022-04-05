@@ -80,6 +80,28 @@
                 </li>
                 <!-- Raw Material End -->
 
+                <!-- Purchase Start -->
+                <li class="{{ ((request()->is('purchase/requisition')) || (request()->is('purchase/requisition'))) ? 'menu-item menu-item-submenu menu-item-open' : 'menu-item menu-item-submenu' }}" aria-haspopup="true" data-menu-toggle="hover">
+                    <a href="javascript:;" class="menu-link menu-toggle">
+                        <span class="menu-icon fas fa-shopping-cart"></span>
+                        <span class="menu-text">Purchase</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="menu-submenu">
+                        <ul class="menu-subnav">
+                            <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                                <a href="{{url('purchase/requisition')}}" class="{{ (request()->is('purchase/requisition')) ? 'menu-link menu-link-active' : 'menu-link ' }}">
+                                    <i class="menu-bullet menu-bullet-line">
+                                        <span></span>
+                                    </i>
+                                    <span class="menu-text">Requisition</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <!-- Purchase End -->
+
                 <!-- Applications Start -->
                 <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
                     <a href="javascript:;" class="menu-link menu-toggle">
