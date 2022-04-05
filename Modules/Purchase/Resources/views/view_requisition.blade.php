@@ -40,21 +40,18 @@
             </div>
             <div class="modal-body">
                 <form id="addForm" name="addForm">
-                    <div class="form-group">
-                        <input type="hidden" name="id" id="id" value="">
-                        <input type="text" name="voucher_no" class="form-control" id="voucher_no" placeholder="voucher_no"><br>
-                    </div>
+                    
                     <div class="form-body">
                         <input type="hidden" name="id" id="po_id" />
                         <input type="hidden" name="action" id="po_action" value="add" />
                         <div class="row">
                             <label for="po_voucher_no" class="col-sm-2 col-form-label font-weight-600"><?php echo get_phrases(['SPR', 'no.']) ?> <i class="text-danger">*</i></label>
-                            <div class="col-sm-1">
-                                <input name="voucher_no" type="text" class="form-control" id="po_voucher_no" placeholder="<?php echo get_phrases(['purchase', 'order', 'no']) ?>" autocomplete="off" readonly>
+                            <div class="col-sm-4">
+                                <input name="voucher_no" type="text" class="form-control" id="po_voucher_no" placeholder="<?php echo get_phrases(['purchase', 'order', 'no']) ?>" autocomplete="off">
                             </div>
                             <label for="po_date" class="col-sm-1 col-form-label font-weight-600"><?php echo get_phrases(['date']) ?> <i class="text-danger">*</i></label>
-                            <div class="col-sm-1">
-                                <input name="date" type="text" class="form-control datepicker1" id="po_date" placeholder="<?php echo get_phrases(['date']) ?>" value="<?php echo date('d/m/Y') ?>" autocomplete="off" readonly>
+                            <div class="col-sm-4">
+                                <input name="date" type="date" class="form-control" id="po_date" autocomplete="off" >
                             </div>
                         </div>
 
@@ -64,24 +61,15 @@
                             <table class="table table-sm table-stripped w-100" id="purchase_table">
                                 <thead>
                                     <tr>
-                                        <th width="15%" class="text-center"><?php echo get_phrases(['item', 'name']) ?><i class="text-danger">*</i></th>
-                                        <th width="5%" class="text-center"><?php echo get_phrases(['present', 'stock']) ?></th>
-                                        <th width="10%" class="text-center"><?php echo get_phrases(['total', 'quantity']) ?></th>
-                                        <th width="5%" class="text-left"><?php echo get_phrases(['unit']) ?></th>
-                                        <th width="5%" class="text-left"><?php echo get_phrases(['last', 'receive', 'date']) ?></th>
-                                        <th width="5%" class="text-left"><?php echo get_phrases(['last', 'receive', 'quantity']) ?></th>
-                                        <th width="5%" class="text-center"><?php echo get_phrases(['monthly', 'consumption']) ?></th>
-                                        <th width="5%" class="text-left"><?php echo get_phrases(['where', 'use']) ?></th>
-                                        <th width="5%"><?php echo get_phrases(['action']) ?></th>
+                                        <th><?php echo get_phrases(['item', 'name']) ?><i class="text-danger">*</i></th>
+                                        <th><?php echo get_phrases(['total', 'quantity']) ?></th>
+                                        <th><?php echo get_phrases(['action']) ?></th>
 
                                     </tr>
                                 </thead>
                                 <tbody id="po_item_div">
 
                                 </tbody>
-                                <input type="hidden" name="sub_total" class="form-control text-right" id="po_sub_total" readonly="">
-                                <input type="hidden" name="grand_total" class="form-control text-right" id="po_grand_total" readonly="">
-                                <input type="hidden" name="vat" class="form-control text-right" id="po_vat" readonly="">
                             </table>
                         </div>
 
@@ -126,12 +114,8 @@
 
         var html = '<tr>'+
                         '<td><select name="item_id[]" id="item_id1" class="form-control custom-select" onchange="po_item_info(this.value,1)" required>'+item_list+'</select></td>'+
-                        '<td class="valign-middle text-right"><span id="main_stock1"></span></td>'+
                         '<td><input type="text" name="qty[]" class="form-control text-right onlyNumber" id="po_qty1" required autocomplete="off" ></td>'+
-                        '<td class="valign-middle"><span id="po_unit1"></span></td>'+
-                        '<td><input type="text" name="total[]" class="form-control po_total text-right" id="po_total_price_1" readonly=""></td>'+
                         '<td><input type="hidden" name="existing[]" id="existing1" value="0"><button type="button" class="btn btn-success addRow" ><i class="fa fa-plus"></i></button></td>'+
-                        '<input type="hidden" name="store[]" id="store1" />'+
                     '</tr>';      
         $("#po_item_div").html(html); 
         $("#po_item_counter").val(1);
@@ -185,7 +169,7 @@
         });
         // initialize btn add
         $('#createNew').click(function() {
-            get_item_list();
+            first_item_row();
             $('#saveBtn').removeClass("d-none");
             $('#saveBtn').val("create");
             $('#id').val('');
