@@ -6,7 +6,7 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\Purchase\Entities\Requisition;
-use Modules\Purchase\Entities\Requisition_details;
+use Modules\Purchase\Entities\RequisitionDetails;
 use \Yajra\Datatables\Datatables;
 
 class RequisitionController extends Controller
@@ -63,13 +63,20 @@ class RequisitionController extends Controller
      */
     public function store(Request $request)
     {
-        Requisition::updateOrCreate(['id' => $request->id],
+        $result = Requisition::updateOrCreate(['id' => $request->id],
                 [
-                 'voucher_no' => $request->voucher_no,
+                //  'voucher_no' => $request->voucher_no,
+                 'voucher_no' => 2,
                  'created_at' => date('Y-m-d H:i:s'),
                  'updated_at' => date('Y-m-d H:i:s'),
                 ]);
-        return response()->json(['success'=>'Saved successfully!']);
+        $details = array(
+            'parent_id' => $result->id,
+            'item_id' => 1,
+            'qty' => 2,
+        );
+        RequisitionDetails::create($details);
+        return response()->json(['success'=>'Saved successfully! '.$result->id]);
     }
 
     /**
