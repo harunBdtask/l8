@@ -3,7 +3,6 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\UserController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\TodoController;
 use App\Http\Controllers\ItemController;
@@ -34,9 +33,6 @@ Route::post('/store-token', [WebNotificationController::class, 'storeToken'])->n
 Route::post('/send-web-notification', [WebNotificationController::class, 'sendWebNotification'])->name('send.web-notification');
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
-Route::get('/user', [UserController::class, 'index'])->name('user.index');
-
-// Route::get('/user.get_data',[UserController::class, 'get_data'])->name('get_data');
 Route::resource('users', UsersController::class);
 //TodoController
 Route::resource('todo', TodoController::class);
